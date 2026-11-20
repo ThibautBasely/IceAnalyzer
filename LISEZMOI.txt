@@ -1,0 +1,13 @@
+ICE ANALYZER - plugin VST3 pour Cubase (Windows)
+
+1. Crée un compte gratuit sur github.com
+2. Crée un nouveau dépôt (bouton "New"), puis "uploading an existing file"
+3. Glisse TOUT le contenu de ce dossier (y compris le dossier .github), puis "Commit changes"
+4. Va dans l'onglet "Actions" : la fabrication du plugin démarre seule (10 à 15 min)
+5. Quand c'est vert, clique dessus et télécharge "IceAnalyzer-VST3-Windows" en bas de la page
+6. Dézippe et copie le dossier "Ice Analyzer.vst3" dans :
+   C:\Program Files\Common Files\VST3
+7. Dans Cubase : Studio > Gestionnaire de plug-ins VST > relancer la détection
+8. Mets "Ice Analyzer" en dernier insert sur le Main Out
+
+Le plugin ne modifie pas le son, il l'analyse seulement.
