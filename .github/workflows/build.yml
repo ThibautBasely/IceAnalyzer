@@ -10,15 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install WebView2 SDK
+      - name: Download WebView2 SDK
         shell: pwsh
         run: |
-          Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser
-          Register-PackageSource -ProviderName NuGet -Name nugetRepository -Location https://www.nuget.org/api/v2 -Force
-          Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository -Force
+          New-Item -ItemType Directory -Force -Path C:\wv2 | Out-Null
+          Invoke-WebRequest -Uri https://www.nuget.org/api/v2/package/Microsoft.Web.WebView2/1.0.1901.177 -OutFile C:\wv2\webview2.zip
+          Expand-Archive -Path C:\wv2\webview2.zip -DestinationPath C:\wv2\Microsoft.Web.WebView2.1.0.1901.177 -Force
+          Get-ChildItem C:\wv2\Microsoft.Web.WebView2.1.0.1901.177\build\native
 
       - name: Configure
-        run: cmake -B build -G "Visual Studio 17 2022" -A x64
+        run: cmake -B build -G "Visual Studio 17 2022" -A x64 -DJUCE_WEBVIEW2_PACKAGE_LOCATION=C:/wv2
 
       - name: Build
         run: cmake --build build --config Release --target IceAnalyzer_VST3
